@@ -30,11 +30,12 @@ class User extends Authenticatable
     {
         $users = DB::table('users')
                 ->select('users.id','users.*','a.status')
-                ->leftJoin(DB::raw("(SELECT c.* FROM users u LEFT JOIN contacts c on u.id= c.contact_id where c.user_id=".Auth::id().") as a"),function($join){
-                $join->on("a.contact_id","=","users.id");
+                ->leftJoin(DB::raw("(SELECT IF(user_id=".Auth::id().",contact_id,user_id) as uid,status FROM contacts where (contact_id=".Auth::id()." or user_id=".Auth::id().")) as a"),function($join){
+                $join->on("a.uid","=","users.id");
                 })
                 ->where('users.id', '!=', Auth::id())                    
-                ->get();  
+                ->get(); 
+                
         return $users; 
     }    
 }
