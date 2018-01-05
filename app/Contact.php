@@ -23,8 +23,8 @@ class Contact extends Model
     {
         $mycontact = DB::table('users')
                 ->select('*')
-                ->join(DB::raw("(SELECT c.* FROM users u LEFT JOIN contacts c on u.id= c.contact_id where (c.contact_id=".Auth::id()." or c.user_id=".Auth::id().")) as a"),function($join){
-                $join->on("a.contact_id","=","users.id");
+                ->join(DB::raw("(SELECT status, IF(user_id=".Auth::id().",contact_id,user_id) as uid FROM contacts where (contact_id=".Auth::id()." or user_id=".Auth::id().") AND status=2 ) as a"),function($join){
+                $join->on("a.uid","=","users.id");
                 })                  
                 ->get();
 
