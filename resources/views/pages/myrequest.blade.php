@@ -5,7 +5,7 @@
 <div>
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="col-sm-12 col-lg-12 text-center">
-    <h1>Contacts</h1>
+    <h1>Request</h1>
 </div>
 <br>
 <div>
