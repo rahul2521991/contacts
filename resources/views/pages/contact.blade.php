@@ -24,9 +24,7 @@
                 <td>{{$v->name}}</td>
                 <td>{{$v->email}}</td>
                 @if($v->status == 2)
-                <td><button class="viewcontact btn btn-primary" data-id="{{$v->contact_id}}">View Contact</button></td>
-                @else
-                <td><button class="acceptrequest btn btn-primary" data-id="{{$v->user_id}}">Accept Request</button></td>
+                <td><button class="viewcontact btn btn-primary" data-id="{{$v->id}}">View Contact</button></td>
                 @endif
             </tr>
             @endforeach
